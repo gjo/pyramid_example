@@ -1,0 +1,107 @@
+openapi: "3.0.0"
+info:
+  title: example_app
+  version: 0.1.dev0
+paths:
+  /:
+    get:
+      operationId: root
+      responses:
+        "200":
+          $ref: "#/components/responses/BlankResponse"
+  /accounts/:
+    post:
+      operationId: account_create
+      requestBody:
+        $ref: "#/components/requestBodies/AccountCreateRequestBody"
+      responses:
+        "200":
+          $ref: "#/components/responses/AccountCreateResponse"
+  /posts/:
+    get:
+      operationId: post_index
+      responses:
+        "200":
+          $ref: "#/components/responses/BlankResponse"
+    post:
+      operationId: post_create
+      requestBody:
+        $ref: "#/components/requestBodies/PostCreateRequestBody"
+      responses:
+        "200":
+          $ref: "#/components/responses/PostDetailResponse"
+components:
+  requestBodies:
+    AccountCreateRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AccountCreateRequestBody"
+    PostCreateRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PostCreateRequestBody"
+  responses:
+    AccountCreateResponse:
+      description: ok
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AccountCreateResponseBody"
+    BlankResponse:
+      description: blank
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BlankResponseBody"
+    PostDetailResponse:
+      description: ok
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PostDetailResponseBody"
+    PostIndexResponse:
+      description: ok
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PostIndexResponseBody"
+  schemas:
+    AccountCreateRequestBody:
+      type: object
+    AccountCreateResponseBody:
+      type: object
+      properties:
+        token:
+          type: string
+      required:
+        - token
+    BlankResponseBody:
+      type: object
+    Post:
+      type: object
+      properties:
+        id:
+          type: integer
+        text:
+          type: string
+      required:
+        - id
+    PostCreateRequestBody:
+      properties:
+        text:
+          type: string
+      required:
+        - text
+    PostDetailResponseBody:
+      $ref: "#/components/schemas/Post"
+    PostIndexResponseBody:
+      type: object
+      properties:
+        posts:
+          type: array
+          items:
+            $ref: "#/components/schemas/Post"
