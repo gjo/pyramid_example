@@ -3,7 +3,8 @@ line-length = 79
 target-version = ['py38']
 exclude = '''
 /(
-    \.git
+    \.env
+  | \.git
   | \.mypy_cache
   | \.pytest_cache
   | \.tox
