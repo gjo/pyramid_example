@@ -4,15 +4,16 @@ from pyramid.config import Configurator
 from sqlalchemy.orm import Session
 from ..db_schemata import Post
 from ..interfaces import IDBSession, ILoggerAdapterFactory, IPostQuery
+from ..typing import LoggerLike
 
 
 logger = getLogger(__name__)
 
 
 class PostQuery:
-    def __init__(self, db: Session, logger_adapter: LoggerAdapter) -> None:
+    def __init__(self, db: Session, logger_: LoggerLike) -> None:
         self.db = db
-        self.logger_adapter = logger_adapter
+        self.logger = logger_
 
     def index(self) -> Any:
         q = self.db.query(Post).order_by(Post.id.desc()).limit(10)
@@ -24,6 +25,6 @@ def includeme(config: Configurator) -> None:
         db = request.find_service(IDBSession, name="readonly")
         logger_adapter_factory = request.find_service(ILoggerAdapterFactory)
         logger_adapter = logger_adapter_factory(logger)
-        return PostQuery(db=db, logger_adapter=logger_adapter)
+        return PostQuery(db=db, logger_=logger_adapter)
 
     config.register_service_factory(factory, IPostQuery)

@@ -10,6 +10,7 @@ from ..interfaces import (
     ILoggerAdapterFactory,
     ITimestamp,
 )
+from ..typing import LoggerLike
 
 
 logger = getLogger(__name__)
@@ -17,10 +18,10 @@ logger = getLogger(__name__)
 
 class AccountCommand:
     def __init__(
-        self, db: Session, logger_adapter: LoggerAdapter, timestamp: ITimestamp
+        self, db: Session, logger_: LoggerLike, timestamp: ITimestamp
     ) -> None:
         self.db = db
-        self.logger_adapter = logger_adapter
+        self.logger = logger_
         self.timestamp = timestamp
 
     def create(self) -> Any:
@@ -34,7 +35,7 @@ class AccountCommand:
         )
         self.db.add(api_key)
         self.db.flush()
-        self.logger_adapter.info(
+        self.logger.info(
             "Account Created: %r, %r", account.id, api_key.id
         )
         return {"token": api_key.secret}
@@ -47,7 +48,7 @@ def includeme(config: Configurator) -> None:
         logger_adapter = logger_adapter_factory(logger)
         timestamp = request.find_service(ITimestamp)
         return AccountCommand(
-            db=db, logger_adapter=logger_adapter, timestamp=timestamp
+            db=db, logger_=logger_adapter, timestamp=timestamp
         )
 
     config.register_service_factory(factory, IAccountCommand)
