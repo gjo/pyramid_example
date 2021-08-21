@@ -1,5 +1,5 @@
 import uuid
-from logging import LoggerAdapter, getLogger
+from logging import getLogger
 from typing import Any
 from pyramid.config import Configurator
 from sqlalchemy.orm import Session
@@ -35,9 +35,7 @@ class AccountCommand:
         )
         self.db.add(api_key)
         self.db.flush()
-        self.logger.info(
-            "Account Created: %r, %r", account.id, api_key.id
-        )
+        self.logger.info("Account Created: %r, %r", account.id, api_key.id)
         return {"token": api_key.secret}
 
 

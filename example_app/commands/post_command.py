@@ -1,4 +1,4 @@
-from logging import LoggerAdapter, getLogger
+from logging import getLogger
 from typing import Any
 from pyramid.config import Configurator
 from sqlalchemy.orm import Session
