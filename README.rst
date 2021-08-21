@@ -46,6 +46,6 @@ update deps::
   $ . .env/bin/activate
   (.env)$ pip install -U pip setuptools wheel
   (.env)$ pip list -l --format freeze > setup_requirements.txt
-  (.env)$ pip install --use-feature=2020-resolver -e '.[develop]'
+  (.env)$ pip install -e '.[develop]'
   (.env)$ pip freeze -l --exclude-editable > constraints.txt
 
