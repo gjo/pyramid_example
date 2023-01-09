@@ -1,7 +1,7 @@
+include .gitignore.in
 include alembic/env.py
 include alembic/script.py.mako
 include alembic/versions/*.py
-include black.toml
 include constraints.txt
 include development.ini
 include example_app/openapi.yaml

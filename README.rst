@@ -7,10 +7,10 @@ develop
 
 setup::
 
-  $ python3.8 -m venv .env
-  $ . .env/bin/activate
-  (.env)$ pip install -r setup_requirements.txt
-  (.env)$ pip install -c constraints.txt -e '.[develop]'
+  $ python3.10 -m venv env310
+  $ . env310/bin/activate
+  (env310)$ pip install -r setup_requirements.txt
+  (env310)$ pip install -c constraints.txt -e '.[develop]'
 
 create databases::
 
@@ -41,11 +41,14 @@ run server::
 
 update deps::
 
-  $ rm -rf .env
-  $ python3.8 -m venv .env
-  $ . .env/bin/activate
-  (.env)$ pip install -U pip setuptools wheel
-  (.env)$ pip list -l --format freeze > setup_requirements.txt
-  (.env)$ pip install -e '.[develop]'
-  (.env)$ pip freeze -l --exclude-editable > constraints.txt
+  $ rm -rf env310
+  $ python3.10 -m venv env310
+  $ . env310/bin/activate
+  (env310)$ pip install -U pip setuptools wheel
+  (env310)$ pip list --format freeze > setup_requirements.txt
+
+  [EDIT pyproject.toml]
+
+  (env310)$ pip install -e '.[develop]'
+  (env310)$ pip list --format freeze --exclude-editable > constraints.txt
 
