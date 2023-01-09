@@ -4,6 +4,7 @@ from pyramid.config import Configurator
 from pyramid.request import Request
 from pyramid.view import view_config
 
+OAS_DELETE = dict(openapi=True, renderer="json", request_method="DELETE")
 OAS_GET = dict(openapi=True, renderer="json", request_method="GET")
 OAS_POST_JSON = dict(
     openapi=True,
@@ -16,6 +17,11 @@ OAS_POST_JSON = dict(
 @view_config(route_name="root", **OAS_GET)
 def blank_view(request: Request) -> Any:
     return {}
+
+
+@view_config(route_name="post", permission="post_delete", **OAS_DELETE)
+def resource_delete_view(request: Request) -> Any:
+    return request.context.delete()
 
 
 @view_config(route_name="posts", permission="post_read", **OAS_GET)

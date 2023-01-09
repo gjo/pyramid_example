@@ -58,8 +58,18 @@ class IPostCommand(Interface):
         post_create
         """
 
+    def delete(post_id: int) -> Any:
+        """
+        post_delete
+        """
+
 
 class IPostQuery(Interface):
+    def find_active_by_id(post_id: int) -> Any:
+        """
+        post_detail
+        """
+
     def index() -> Any:
         """
         post_index

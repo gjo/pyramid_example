@@ -7,6 +7,9 @@ class ResourceBase:
     def __init__(self, request: Request) -> None:
         self.request = request
 
+    def delete(self) -> Any:  # pragma: no cover
+        raise NotImplementedError
+
     def get(self) -> Any:  # pragma: no cover
         raise NotImplementedError
 

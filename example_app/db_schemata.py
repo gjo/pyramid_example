@@ -70,3 +70,12 @@ class Post(Base):
 
     id = Column(INTEGER, primary_key=True, autoincrement=True)
     text = Column(TEXT)
+    account_id = Column(
+        BIGINT,  # FIXME: 本来書く必要はないけどsqlalchemy-stubが対応してない
+        ForeignKey(Account.id),
+        nullable=False,
+    )
+    created_at = Column(DATETIME(fsp=6), nullable=False, index=True)
+    # deleted_at = Column(DATETIME(fsp=6), nullable=True, server_default=text("NULL"))
+
+    account = relationship(Account, innerjoin=True, uselist=False)

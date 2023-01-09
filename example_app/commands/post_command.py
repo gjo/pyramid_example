@@ -23,6 +23,11 @@ class PostCommand:
         self.logger.info("Post created %r", post.id)
         return {"id": post.id, "text": post.text}
 
+    def delete(self, post_id: int) -> Any:
+        post = self.db.query(Post).filter(Post.id == post_id).one()
+        self.logger.info("Post deleted %r", post.id)
+        return {}
+
 
 def includeme(config: Configurator) -> None:
     def factory(context: Any, request: Any) -> Any:

@@ -30,7 +30,22 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/PostDetailResponse"
+  /posts/{postId}/:
+    parameters:
+      - $ref: "#/components/parameters/PostIdInPath"
+    delete:
+      operationId: post_delete
+      responses:
+        "200":
+          $ref: "#/components/responses/BlankResponse"
 components:
+  parameters:
+    PostIdInPath:
+      in: path
+      name: postId
+      required: true
+      schema:
+        $ref: "#/components/schemas/PostId"
   requestBodies:
     AccountCreateRequestBody:
       required: true
@@ -98,6 +113,8 @@ components:
         - text
     PostDetailResponseBody:
       $ref: "#/components/schemas/Post"
+    PostId:
+      type: integer
     PostIndexResponseBody:
       type: object
       properties:

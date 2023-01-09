@@ -1,6 +1,7 @@
 from logging import getLogger
 from typing import Any
 
+import sqlalchemy as sa
 from pyramid.config import Configurator
 from sqlalchemy.orm import Session
 
@@ -19,6 +20,13 @@ class PostQuery:
     def index(self) -> Any:
         q = self.db.query(Post).order_by(Post.id.desc()).limit(10)
         return {"posts": [{"id": r.id, "text": r.text} for r in q.all()]}
+
+    def find_active_by_id(self, post_id: int) -> Any:
+        q = self.db.query(Post).filter(
+            Post.id == post_id,
+            Post.sys_deleted_at.isnot_(sa.text("NULL")),
+        )
+        return q.one_or_one()
 
 
 def includeme(config: Configurator) -> None:
