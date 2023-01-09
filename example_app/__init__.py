@@ -39,7 +39,7 @@ logger = getLogger(__name__)
 
 
 def includeme(config: Configurator) -> None:
-    from . import db_schemata  # noqa: F401;  load schema
+    from . import db_schemata  # noqa: F401;  load schema for finalize relations
 
     settings = config.registry.settings
     for c in components:

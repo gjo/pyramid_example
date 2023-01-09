@@ -1,8 +1,10 @@
 import datetime
-from logging import Logger, LoggerAdapter
-from typing import Any, Optional
+from logging import Logger
+from typing import Any
 
 from zope.interface import Attribute, Interface
+
+from .typing import LoggerLike
 
 
 class IDBEngine(Interface):
@@ -24,19 +26,19 @@ class IDBSessionFactory(Interface):
 
 
 class ILoggerAdapterFactory(Interface):
-    def __call__(logger: Logger) -> LoggerAdapter:
+    def __call__(logger: Logger) -> LoggerLike:
         """
         returns request assigned LoggerAdapter
         """
 
 
 class IActor(Interface):
-    account_id: Optional[int] = Attribute("Account Id")
-    account_id_raw: Optional[int] = Attribute("Unauthenticated Account Id")
-    api_key_id: Optional[str] = Attribute("API Key Id")
-    api_key_id_raw: Optional[str] = Attribute("Unauthenticated API Key Id")
-    remote_addr: Optional[str] = Attribute("REMOTE_ADDR from HTTP Headers")
-    user_agent: Optional[str] = Attribute("USER_AGENT from HTTP Headers")
+    account_id: int | None = Attribute("Account Id")
+    account_id_raw: int | None = Attribute("Unauthenticated Account Id")
+    api_key_id: str | None = Attribute("API Key Id")
+    api_key_id_raw: str | None = Attribute("Unauthenticated API Key Id")
+    remote_addr: str | None = Attribute("REMOTE_ADDR from HTTP Headers")
+    user_agent: str | None = Attribute("USER_AGENT from HTTP Headers")
 
 
 class ITimestamp(Interface):

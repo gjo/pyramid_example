@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Optional
+from typing import Any
 
 from pyramid.config import Configurator
 from pyramid.request import Request
@@ -11,12 +11,12 @@ from ..interfaces import IActor, IDBSession
 
 @dataclass
 class Actor:
-    account_id: Optional[int]
-    account_id_raw: Optional[int]
-    api_key_id: Optional[str]
-    api_key_id_raw: Optional[str]
-    remote_addr: Optional[str]
-    user_agent: Optional[str]
+    account_id: int | None
+    account_id_raw: int | None
+    api_key_id: str | None
+    api_key_id_raw: str | None
+    remote_addr: str | None
+    user_agent: str | None
 
 
 def factory(context: Any, request: Request) -> Actor:
