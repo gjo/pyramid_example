@@ -1,5 +1,5 @@
 from logging import Logger, LoggerAdapter
-from typing import Any, Dict, Tuple
+from typing import Any
 
 from pyramid.config import Configurator
 from pyramid.request import Request
@@ -8,8 +8,10 @@ from ..interfaces import ILoggerAdapterFactory
 
 
 class WebLoggerAdapter(LoggerAdapter):
-    def process(self, msg: str, kwargs: Any) -> Tuple[str, Dict[str, Any]]:
-        msg = f"[IP:{self.extra['request'].remote_addr}] {msg}"
+    def process(self, msg: str, kwargs: Any) -> tuple[str, dict[str, Any]]:
+        request: Request | None = self.extra.get("request") if self.extra else None
+        if request:
+            msg = f"[IP:{request.remote_addr}] {msg}"
         return msg, kwargs
 
 
