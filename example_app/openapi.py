@@ -1,8 +1,8 @@
 from pathlib import Path
+
 from openapi_core.validation.request.datatypes import RequestValidationResult
 from pyramid.config import Configurator
 from pyramid.request import Request
-
 
 OAS_PATH = Path(__file__).absolute().parent / "openapi.yaml"
 

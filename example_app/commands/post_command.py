@@ -1,11 +1,12 @@
 from logging import getLogger
 from typing import Any
+
 from pyramid.config import Configurator
 from sqlalchemy.orm import Session
+
 from ..db_schemata import Post
 from ..interfaces import IDBSession, ILoggerAdapterFactory, IPostCommand
 from ..typing import LoggerLike
-
 
 logger = getLogger(__name__)
 

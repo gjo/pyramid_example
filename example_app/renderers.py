@@ -1,7 +1,8 @@
 import datetime
+
 from pyramid.config import Configurator
-from pyramid.renderers import JSON
 from pyramid.interfaces import IRequest
+from pyramid.renderers import JSON
 
 
 def json_date_adapter(d: datetime.date, request: IRequest) -> str:

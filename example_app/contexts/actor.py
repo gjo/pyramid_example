@@ -1,8 +1,10 @@
 from dataclasses import dataclass
 from typing import Any, Optional
+
 from pyramid.config import Configurator
 from pyramid.request import Request
 from sqlalchemy import text
+
 from ..db_schemata import Account, ApiKey
 from ..interfaces import IActor, IDBSession
 

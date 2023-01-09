@@ -1,5 +1,6 @@
-import pytest
 import os
+
+import pytest
 import sqlalchemy
 import webtest
 from pyramid.request import Request
@@ -13,6 +14,7 @@ else:
 @pytest.fixture(scope="session")
 def db_schema():
     from example_app.db_schemata import Base
+
     from .factories import make_default_data
 
     engine = sqlalchemy.create_engine(TESTING_DB_URI)

@@ -1,6 +1,7 @@
 from pyramid.config import Configurator
-from .db_readwrite import setup
+
 from ..interfaces import IDBEngine, IDBSession, IDBSessionFactory
+from .db_readwrite import setup
 
 
 def single_instance(config: Configurator) -> None:

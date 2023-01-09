@@ -1,5 +1,7 @@
 from typing import Any
+
 from pyramid.security import Allowed, Denied, PermitsResult
+
 from ..interfaces import IActor, IPostCommand, IPostQuery
 from ..openapi import validated_params
 from .base import ResourceBase

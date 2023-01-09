@@ -1,7 +1,9 @@
 from logging import Logger, LoggerAdapter
 from typing import Any, Dict, Tuple
+
 from pyramid.config import Configurator
 from pyramid.request import Request
+
 from ..interfaces import ILoggerAdapterFactory
 
 

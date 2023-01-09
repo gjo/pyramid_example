@@ -1,25 +1,19 @@
 import uuid
 from logging import getLogger
 from typing import Any
+
 from pyramid.config import Configurator
 from sqlalchemy.orm import Session
-from ..db_schemata import Account, ApiKey
-from ..interfaces import (
-    IAccountCommand,
-    IDBSession,
-    ILoggerAdapterFactory,
-    ITimestamp,
-)
-from ..typing import LoggerLike
 
+from ..db_schemata import Account, ApiKey
+from ..interfaces import IAccountCommand, IDBSession, ILoggerAdapterFactory, ITimestamp
+from ..typing import LoggerLike
 
 logger = getLogger(__name__)
 
 
 class AccountCommand:
-    def __init__(
-        self, db: Session, logger_: LoggerLike, timestamp: ITimestamp
-    ) -> None:
+    def __init__(self, db: Session, logger_: LoggerLike, timestamp: ITimestamp) -> None:
         self.db = db
         self.logger = logger_
         self.timestamp = timestamp
@@ -45,8 +39,6 @@ def includeme(config: Configurator) -> None:
         logger_adapter_factory = request.find_service(ILoggerAdapterFactory)
         logger_adapter = logger_adapter_factory(logger)
         timestamp = request.find_service(ITimestamp)
-        return AccountCommand(
-            db=db, logger_=logger_adapter, timestamp=timestamp
-        )
+        return AccountCommand(db=db, logger_=logger_adapter, timestamp=timestamp)
 
     config.register_service_factory(factory, IAccountCommand)

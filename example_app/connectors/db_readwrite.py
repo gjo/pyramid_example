@@ -1,16 +1,16 @@
 from typing import Any
+
 from pyramid.config import Configurator
 from sqlalchemy import engine_from_config
 from sqlalchemy.orm import sessionmaker
 from zope.sqlalchemy import register
+
 from ..interfaces import IDBEngine, IDBSession, IDBSessionFactory
 
 
 def setup(config: Configurator, name: str) -> None:
     settings = config.registry.settings
-    engine = engine_from_config(
-        settings, prefix=f"sqlalchemy.{name}.", logging_name=name
-    )
+    engine = engine_from_config(settings, prefix=f"sqlalchemy.{name}.", logging_name=name)
     config.register_service(engine, IDBEngine, name=name)
 
     session_factory = sessionmaker(bind=engine)

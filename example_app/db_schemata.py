@@ -22,13 +22,9 @@ class DBSchema:
     sys_updated_at = Column(
         DATETIME(fsp=6),
         nullable=False,
-        server_default=text(
-            "CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"
-        ),
+        server_default=text("CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"),
     )
-    sys_deleted_at = Column(
-        DATETIME(fsp=6), nullable=True, server_default=text("NULL")
-    )
+    sys_deleted_at = Column(DATETIME(fsp=6), nullable=True, server_default=text("NULL"))
 
     # hack for column creation order
     sys_created_at._creation_order = 2000  # type: ignore
@@ -43,9 +39,7 @@ class Account(Base):
     __tablename__ = "accounts"
     id = Column(BIGINT, primary_key=True, autoincrement=True)
     created_at = Column(DATETIME(fsp=6), nullable=False, index=True)
-    deleted_at = Column(
-        DATETIME(fsp=6), nullable=True, server_default=text("NULL")
-    )
+    deleted_at = Column(DATETIME(fsp=6), nullable=True, server_default=text("NULL"))
 
 
 class ApiKey(Base):
@@ -62,9 +56,7 @@ class ApiKey(Base):
         nullable=False,
     )
     created_at = Column(DATETIME(fsp=6), nullable=False, index=True)
-    deleted_at = Column(
-        DATETIME(fsp=6), nullable=True, server_default=text("NULL")
-    )
+    deleted_at = Column(DATETIME(fsp=6), nullable=True, server_default=text("NULL"))
 
     account = relationship(Account, innerjoin=True, uselist=False)
 

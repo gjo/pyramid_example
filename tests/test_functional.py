@@ -7,9 +7,7 @@ def test(testapp):
     token = resp1.json["token"]
     fake = faker.Faker()
     fake_post = fake.job()
-    resp2 = testapp.post_json(
-        "/posts/", {"text": fake_post}, headers={"X-Api-Key": token}
-    )
+    resp2 = testapp.post_json("/posts/", {"text": fake_post}, headers={"X-Api-Key": token})
     assert "id" in resp2.json
     post_id = resp2.json["id"]
     resp3 = testapp.get("/posts/")

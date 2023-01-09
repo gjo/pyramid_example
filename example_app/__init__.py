@@ -1,5 +1,6 @@
 from logging import getLogger
 from typing import Any
+
 from pyramid.config import Configurator
 
 __version__ = "0.1.dev0"
@@ -61,7 +62,9 @@ def app_factory(global_config: Any, **settings: Any) -> WSGIApplication:
 
 def pshell_setup(env: Any) -> Any:  # pragma: no cover
     from contextlib import suppress
+
     from transaction.interfaces import NoTransaction
+
     from .interfaces import IDBSession
 
     request = env["request"]

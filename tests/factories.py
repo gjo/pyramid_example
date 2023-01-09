@@ -1,5 +1,6 @@
 from factory import Factory, Faker, Sequence
 from sqlalchemy.orm import sessionmaker
+
 from example_app.db_schemata import Post
 
 

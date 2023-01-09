@@ -1,6 +1,8 @@
 import datetime
 from typing import Any
+
 from pyramid.config import Configurator
+
 from ..interfaces import ITimestamp
 
 

@@ -1,5 +1,7 @@
 from typing import Any
+
 from pyramid.security import Allowed, Denied, PermitsResult
+
 from ..interfaces import IAccountCommand
 from .base import ResourceBase
 

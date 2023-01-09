@@ -5,9 +5,10 @@ Revises:
 Create Date: 2020-12-12 07:06:49.306278+00:00
 """
 
-from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import mysql
+
+from alembic import op
 
 # revision identifiers, used by Alembic.
 revision = "dab6dc0c1994"
@@ -37,9 +38,7 @@ def upgrade():
         sa.Column(
             "sys_updated_at",
             mysql.DATETIME(fsp=6),
-            server_default=sa.text(
-                "CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"
-            ),
+            server_default=sa.text("CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"),
             nullable=False,
         ),
         sa.Column(
@@ -69,9 +68,7 @@ def upgrade():
         sa.Column(
             "sys_updated_at",
             mysql.DATETIME(fsp=6),
-            server_default=sa.text(
-                "CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"
-            ),
+            server_default=sa.text("CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"),
             nullable=False,
         ),
         sa.Column(
@@ -107,9 +104,7 @@ def upgrade():
         sa.Column(
             "sys_updated_at",
             mysql.DATETIME(fsp=6),
-            server_default=sa.text(
-                "CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"
-            ),
+            server_default=sa.text("CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"),
             nullable=False,
         ),
         sa.Column(
